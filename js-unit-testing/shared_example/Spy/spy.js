@@ -1,4 +1,3 @@
-const axios = require('axios');
 
 class ListMember {
     constructor() {
@@ -6,6 +5,15 @@ class ListMember {
         this.listMember = []
         this.listTask = {}
     }
+    addMember =  (nameMember) => {
+        if (checkName(nameMember)){
+            this.listMember.push(nameMember) 
+            return 'Success'
+        }
+        else 
+            return 'Invalid name'
+    }
+    countMember = () => this.listMember.length
 
     getListMember = async () => {
         const response = await axios.get('https://jsonplaceholder.typicode.com/users');
@@ -21,9 +29,7 @@ class ListMember {
     */
     assignedTask = (name, task, taskId) => {
         const result = this.checkTask(name, taskId)
-        if (typeof task !== 'function'){
-            throw new Error('Argument task must be a function')
-        }
+
         if (result === true){
             try {
                 this.listTask[name].push(task(taskId))

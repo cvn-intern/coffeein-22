@@ -1,24 +1,31 @@
 //test 
-const hello =  require('./Matcher');
+const welcome =  require('./Matcher');
 
 describe('Test function hello', () => {
     test('Call function hello with name is "luan0". Function will be throw an error"', () => {
-        expect(() => hello('luan0')).toThrow(Error)
+        expect(() => welcome('luan``')).toThrow(Error)
     })
     
     test('Call function hello with name is an empty string. Function will be throw an error', () => {
-        expect(() => hello('')).toThrow(Error)
+        expect(() => welcome('')).toThrow(Error)
     })
     
     test('Call function without argument. Function will be throw an error ', () => {
-        expect(() => hello()).toThrow(Error)
+        expect(() => welcome()).toThrow(Error)
     })
     
     test('Call function with argument is a number. Function will be throw an error', () => {
-        expect(() => hello(123)).toThrow(Error)
+        expect(() => welcome(123)).toThrow(Error)
     })
     
-    test('Call function with name "Thanh Luan". Function will be return Hello Thanh Luan', () => {
-        expect(hello('Thanh Luan')).toBe('Hello Thanh Luan')
+    test('Call function with name "Thanh Luan". Function will be return "Welcome Thanh Luan to Cybozu company"', () => {
+        expect(welcome('Thanh Luan')).toBe('Welcome Thanh Luan to Cybozu company')
+    })
+
+    // Example about the wrong except
+    test('Call function with name "Thanh Luan". Function will be return "Welcome Thanh Long to Cybozu company"', () => {
+        expect(welcome('Phi Huy')).toBe('Welcome Thanh Long to Cybozu company')
     })
 })
+
+

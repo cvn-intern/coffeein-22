@@ -6,8 +6,6 @@ const myTeam = new ListMember()
 const axios = require('axios'); 
 jest.mock('axios');
 
-const mockTask = jest.fn((taskIndex) => `Do task ${taskIndex}`);
-
 describe('Test Mock function', () => {
     it('call getListMember and returns list member of myTeam in case data have 0 elements', async () => {
         axios.get.mockResolvedValue({
@@ -19,7 +17,7 @@ describe('Test Mock function', () => {
         expect(myTeam.listMember).toEqual(listMemberNames);
     });
     
-    it('call getListMember and returns list member of myTeam in case data have 10 elements', async () => {
+    it('call getListMember and returns list member of myTeam in case data have 5 elements', async () => {
         axios.get.mockResolvedValue({
           data: [
             {
@@ -41,6 +39,38 @@ describe('Test Mock function', () => {
             },
             {
                 "name": "Minh Duc",
+                "username": "minhduc"
+            }
+        ]
+        });
+      
+        await myTeam.getListMember();
+        const listMemberNames = ['Thanh Long','Thanh Luan','Phi Huy','Quang Kiet', 'Minh Duc']
+        expect(myTeam.listMember).toEqual(listMemberNames);
+    });
+
+    it('call getListMember() function but data has no key to return', async () => {
+        axios.get.mockResolvedValue({
+        data: [
+            {
+                "member_name": "Thanh Long",
+                "username": "thanhlong"
+            },
+            {
+                "member_name": "Thanh Luan",
+                "username": "thanhluan"
+            },
+            {
+                "member_name": "Phi Huy",
+                "username": "phihuy"
+            },
+            {
+                "member_name": "Quang Kiet",
+                "username": "quangkiet"
+                
+            },
+            {
+                "member_name": "Minh Duc",
                 "username": "minhduc"
             }
         ]

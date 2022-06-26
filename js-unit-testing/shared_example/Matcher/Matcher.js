@@ -9,19 +9,23 @@ function checkName(name) {
     if (name == "")
         return false
     for (let i = 0; i < name.length; i++){
-        if (!((name[i] >= 'a' && name[i] <= 'z') || (name[i] >= 'A' && name[i] <= 'Z') || name[i] == ' '))
+        if (!((name[i] >= 'a' && name[i] <= 'z') || 
+        (name[i] >= 'A' && name[i] <= 'Z') || 
+        name[i] == ' '))
             return false
     }
     return true
 }
 
-function hello(name) {
+function welcome(name) {
     if (checkName(name)){
-        return `Hello ${name}`
+        return `Welcome ${name} to Cybozu company`
     }
     else {
         throw new Error("Invalid name: " + name)
     }
 }
 
-module.exports = hello
+module.exports = welcome
+
+

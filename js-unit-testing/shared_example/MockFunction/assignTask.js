@@ -1,4 +1,5 @@
 const axios = require('axios');
+const TYPE_ERROR = 'Argument task must be a function'
 
 class ListMember {
     constructor() {
@@ -59,5 +60,6 @@ class ListMember {
 }
 
 module.exports = {
-    ListMember: ListMember
+    ListMember: ListMember,
+    TYPE_ERROR
 }

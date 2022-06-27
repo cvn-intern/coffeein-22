@@ -1,5 +1,5 @@
 
-const listMembers = require('./mockData')
+const listMembers = require('./getListMemberName')
 let ListMember = listMembers.ListMember;
 
 const myTeam = new ListMember()
@@ -7,17 +7,17 @@ const axios = require('axios');
 jest.mock('axios');
 
 describe('Test Mock function', () => {
-    it('call getListMember and returns list member of myTeam in case data have 0 elements', async () => {
+    it('should return a empty array', async () => {
         axios.get.mockResolvedValue({
           data: []
         });
       
-        await myTeam.getListMember();
+        await myTeam.getListMemberName();
         const listMemberNames = []
         expect(myTeam.listMember).toEqual(listMemberNames);
     });
     
-    it('call getListMember and returns list member of myTeam in case data have 5 elements', async () => {
+    it('should return an array with 5 elememt', async () => {
         axios.get.mockResolvedValue({
           data: [
             {
@@ -44,12 +44,12 @@ describe('Test Mock function', () => {
         ]
         });
       
-        await myTeam.getListMember();
+        await myTeam.getListMemberName();
         const listMemberNames = ['Thanh Long','Thanh Luan','Phi Huy','Quang Kiet', 'Minh Duc']
         expect(myTeam.listMember).toEqual(listMemberNames);
     });
 
-    it('call getListMember() function but data has no key to return', async () => {
+    it('should return an array with 5 value undifined', async () => {
         axios.get.mockResolvedValue({
         data: [
             {
@@ -76,8 +76,8 @@ describe('Test Mock function', () => {
         ]
         });
       
-        await myTeam.getListMember();
-        const listMemberNames = ['Thanh Long','Thanh Luan','Phi Huy','Quang Kiet', 'Minh Duc']
+        await myTeam.getListMemberName();
+        const listMemberNames = [undefined,undefined,undefined,undefined, undefined]
         expect(myTeam.listMember).toEqual(listMemberNames);
     });
 })

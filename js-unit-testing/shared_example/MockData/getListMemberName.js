@@ -5,7 +5,7 @@ class ListMember {
         this.listMember = []
     }
 
-    getListMember = async () => {
+    getListMemberName = async () => {
         const response = await axios.get('https://jsonplaceholder.typicode.com/users');
         this.listMember = response.data.map(item => item.name);
     }

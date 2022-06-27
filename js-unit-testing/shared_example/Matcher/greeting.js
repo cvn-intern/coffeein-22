@@ -1,3 +1,5 @@
+const INVALID_ERROR = "Invalid name"
+ 
 function checkName(name) { 
     try {
         name = name.toString()
@@ -22,10 +24,12 @@ function welcome(name) {
         return `Welcome ${name} to Cybozu company`
     }
     else {
-        throw new Error("Invalid name: " + name)
+        throw new Error(`${INVALID_ERROR}: ${name}`)
     }
 }
 
-module.exports = welcome
-
+module.exports = {
+    welcome,
+    'INVALID_ERROR': INVALID_ERROR
+}
 

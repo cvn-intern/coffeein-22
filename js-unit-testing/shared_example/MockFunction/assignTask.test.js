@@ -1,9 +1,11 @@
 
-const listMembers = require('./mockFunc')
+const listMembers = require('./assignTask')
 let ListMember = listMembers.ListMember;
 
 const myTeam = new ListMember()
 const axios = require('axios'); 
+
+// Tất cả method trong module axios sẽ trả về dưới dạng mock function jest.fn()
 jest.mock('axios');
 
 const mockTask = jest.fn((taskIndex) => `Do task ${taskIndex}`);
@@ -39,28 +41,28 @@ describe('Test Mock function', () => {
         await myTeam.getListMember();
     })
 
-    it('Asign task 5 for member "Phi Huy" but "Phi Huy" can not do task 5', () => {
+    it('should return a string in case error', () => {
         const result = myTeam.assignedTask('Phi Huy', mockTask, 5)
         expect(myTeam.listTask['Phi Huy']).toBeUndefined()
         expect(result).toEqual('Member can not do this task')
     })
 
-    it('Asign task 0 for member "Phi Huy"', () => {
+    it('should create an array and add new task for member in list task', () => {
         myTeam.assignedTask('Phi Huy', mockTask, 0)
         expect(myTeam.listTask['Phi Huy']).toEqual(['Do task 0'])
     })
 
-    it('Asign task 0 for member "Phi Huy" but argument task is not a function', () => {
-        expect(() => myTeam.assignedTask('Phi Huy', 'task', 0)).toThrow(Error)
+    it('should throw an error if argument task is not a function', () => {
+        expect(() => myTeam.assignedTask('Phi Huy', 'task', 0)).toThrow(listMembers.TYPE_ERROR)
     })
 
-    it('Asign task 1 for member "Kiet" but "Kiet" is not exist in list member', ()  => {
+    it('should throw an error if name member is not exist in list member', ()  => {
         const result = myTeam.assignedTask('Kiet', mockTask, 1)
         expect(result).toBe('Name is not exist')
         expect(myTeam.listTask['Kiet']).toBeUndefined()
     })
     
-    it('Asign task 0, 1 for member "Thanh Luan"', ()  => {
+    it('should create an array and push task in list task of member', ()  => {
         myTeam.assignedTask('Thanh Luan', mockTask, 1)
         myTeam.assignedTask('Thanh Luan', mockTask, 2)
         expect(myTeam.listTask['Thanh Luan']).toEqual(['Do task 1', 'Do task 2'])

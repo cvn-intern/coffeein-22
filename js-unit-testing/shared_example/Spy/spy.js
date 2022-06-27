@@ -5,28 +5,7 @@ class ListMember {
         this.listMember = []
         this.listTask = {}
     }
-    addMember =  (nameMember) => {
-        if (checkName(nameMember)){
-            this.listMember.push(nameMember) 
-            return 'Success'
-        }
-        else 
-            return 'Invalid name'
-    }
-    countMember = () => this.listMember.length
 
-    getListMember = async () => {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-        this.listMember = response.data.map(item => item.name);
-    }
-    /*
-    example of listTask
-    {
-        'Phi Huy': [task1, task 2],
-        'Kiet': [task3, task4],
-        'Luan': [task1, task3]
-    }
-    */
     assignedTask = (name, task, taskId) => {
         const result = this.checkTask(name, taskId)
 
